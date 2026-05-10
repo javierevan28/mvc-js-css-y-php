@@ -39,7 +39,6 @@ export default class UserController{
             }catch(error){
                 this.view.showError("Error en el servidor");
             }
-            this.view.showSuccess("Login exitoso");
         });
     }
 }
