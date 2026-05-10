@@ -18,6 +18,27 @@ export default class UserController{
                 this.view.showError("Usuario o contraseña deben ser ingresados");
                 return;
             }
+
+            // API
+            try{
+                const response = await fetch("backend/api/login.php",{
+                    method:"POST",
+                    headers:{
+                        "Content-Type":"aplication/json"
+                    },
+                    body:JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if(result.success){
+                    this.view.showSuccess(result.message);
+                }else{
+                    this.view.showError(result.message);
+                }
+            }catch(error){
+                this.view.showError("Error en el servidor");
+            }
             this.view.showSuccess("Login exitoso");
         });
     }
