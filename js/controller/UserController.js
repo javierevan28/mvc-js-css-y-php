@@ -8,7 +8,7 @@ export default class UserController{
     }
 
     init(){
-        this.view.form.addEventListener("submit", (e)=>{
+        this.view.form.addEventListener("submit", async (e)=>{
             e.preventDefault();
 
             const data = this.view.getUserData();
@@ -24,7 +24,7 @@ export default class UserController{
                 const response = await fetch("backend/api/login.php",{
                     method:"POST",
                     headers:{
-                        "Content-Type":"aplication/json"
+                        "Content-Type":"application/json"
                     },
                     body:JSON.stringify(data)
                 });
