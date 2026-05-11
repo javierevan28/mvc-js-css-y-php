@@ -1,19 +1,28 @@
-<?php   
-    class Database{
-        private $host = "localhost";
-        private $db_name = "mvc_login";
-        private $username = "root";
-        private $password = "";
-        public $conn;
+<?php
 
-        // Método de conexión
-        public function connect(){
-            $this -> conn = null;
+class Database {
+    private $host = "localhost";
+    private $db_name = "mvc_login";
+    private $username = "root";
+    private $password = "";
+    public $conn;
 
-            try{
-                
-            }catch(PDOException $e){
-                echo json_encode(["error" => "Error de conexión"]);
-            }
+    public function connect() {
+        $this->conn = null;
+
+        try {
+            $this->conn = new PDO(
+                "mysql:host=" . $this->host . ";dbname=" . $this->db_name,
+                $this->username,
+                $this->password
+            );
+
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        } catch(PDOException $e) {
+            echo json_encode(["error" => "Error de conexión"]);
         }
+
+        return $this->conn;
     }
+}
